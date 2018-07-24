@@ -1,0 +1,28 @@
+<h1>{{ sala.nazwa }}</h1>
+<h4>{{ sala.opis }}</h4>
+
+
+{% if sala.wydarzenie_set.count == 0 %}
+    <h6>Nie ma żadnych rezerwacji dla tej sali!</h6>
+{% else %}
+    <h6>Rezerwacje dla tej sali:</h6>
+    <ul>
+        {% for wydarzenie in sala.wydarzenie_set.all %}
+            {% if wydarzenie.podajdate > dzisiaj %}
+                <li>{{ wydarzenie.kto }}; {{ wydarzenie.podajdate }}; {{ wydarzenie.s_hour }}:00 - {{ wydarzenie.e_hour }}:00</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+<form action="{% url 'sala:rezerwuj' sala.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Rezerwuj">
+</form>
+
+<form action="{% url 'sala:index' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Powrót do spisu sal">
+</form>
+

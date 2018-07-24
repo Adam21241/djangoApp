@@ -1,0 +1,13 @@
+{% if all_sale %}
+    <h3>Poniżej znajdują się sale, które możesz zarezerwować:</h3>
+    <ul>
+        {% for sala in all_sale %}
+        <li><a href="{% url 'sala:detail' sala.id %}">{{ sala.nazwa }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>Aktualnie nie ma żadnej sali w bazie!</h3>
+{% endif %}
+
+
+<a href="{% url 'sala:register' %}">Zarejestruj się!</a>

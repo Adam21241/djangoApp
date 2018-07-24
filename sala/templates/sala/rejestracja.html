@@ -1,0 +1,8 @@
+<h3>REJESTRACJA</h3></br>
+<form action="{% url 'sala:index' %}" method="post">
+    {% csrf_token %}
+    Podaj nick: <input type='text' name='nick'></br></br>
+    Podaj email: <input type='text' name='email'></br></br>
+    Podaj hasło: <input type='password' name='password'></br></br>
+    <input type="submit" value="Potwierdź">
+</form>

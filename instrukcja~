@@ -1,0 +1,9 @@
+Na linuksie (trzeba mieć zainstalowane django):
+
+1) ustaw ścieżkę dostępu na folder z projektem
+
+2) sudo python3 manage.py runserver
+
+3) w oknie przeglądarki wpisz http://127.0.0.1:8000/sala
+
+4) enjoy!

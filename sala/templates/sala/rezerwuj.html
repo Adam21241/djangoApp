@@ -1,0 +1,34 @@
+<h1>Rezerwuj "{{ sala.nazwa }}"</h1>
+
+<h6>UWAGA: Jeżeli pozostawisz pole 'nick' puste, zostaniesz wpisany jako 'Gościu'.</h6><br>
+
+<form action="{% url 'sala:confirm' sala.id %}" method="post">
+    {% csrf_token %}
+    Podaj nick: <input type='text' name='field1'>
+    Podaj datę: <input type='date' name='field2'>
+    Podaj godzinę rozpoczęcia: <input type='number' name='field3' min="10" max="21">
+    Podaj godzinę zakończenia: <input type='number' name='field4' min="11" max="22">
+    <input type="submit" value="Potwierdź">
+</form>
+
+{% if licznik == 0 %}
+    <h4>{{ kto }}, zarezerwowałeś salę "{{ sala.nazwa }}", w terminie {{ data.month }}-{{ data.day }}-{{ data.year }}, od {{ hr1 }}:00 do {{ hr2 }}:00</h4>
+    <h6>(format daty: miesiąc-dzień-rok)</h6>
+{% elif licznik > 0 %}
+    <h4>Nie możesz zarezerwować sali w tym terminie!</h4>
+{% elif licznik == -1 %}
+    <h4>Nie podałeś daty i/lub godziny. Spróbuj ponownie!</h4>
+{% elif licznik == -2 %}
+    <h4>Możesz zarezerwować salę nie wcześniej niż jutro!</h4>
+{% elif licznik == -3 %}
+    <h4>Godzina zakończenia musi być większa niż godzina rozpoczęcia!</h4>
+{% endif %}
+
+
+<form action="{% url 'sala:index' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Powrót do spisu sal">
+</form>
+
+
+
